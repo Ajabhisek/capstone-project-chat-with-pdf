@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  width: 100%;
 }
 
 .chat-history-label {
@@ -15,12 +16,17 @@
 
 .chat-tabs {
   display: flex;
-  overflow-x: auto;
+  flex-direction: column;
   width: 100%;
-  border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
   background-color: #f8f8f8; /* Background color similar to ChatGPT input field */
   border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.chat-tabs .react-tabs__tab-list {
+  display: flex;
+  border-bottom: none;
   margin-bottom: 10px;
 }
 
@@ -29,13 +35,19 @@
   text-align: center;
   cursor: pointer;
   padding: 10px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   border: none; /* Removing border */
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.chat-tabs .react-tabs__tab:hover {
+  background-color: #ddd; /* Grey background on hover */
 }
 
 .chat-tabs .react-tabs__tab--selected {
-  background-color: #3a0a5e; /* Premier League purple */
-  color: white;
+  background-color: #e0e0e0; /* Slightly darker grey background for selected tab */
+  color: #333;
   border-radius: 5px;
 }
 
@@ -43,6 +55,20 @@
   padding: 10px;
   border-radius: 5px;
   background-color: #f8f8f8;
-  margin-top: 10px;
   width: 100%;
+  text-align: left;
+  box-sizing: border-box; /* Ensures padding is included in the element's total width and height */
+}
+
+.message {
+  margin-bottom: 20px;
+}
+
+.question {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.answer {
+  margin-left: 20px;
 }
