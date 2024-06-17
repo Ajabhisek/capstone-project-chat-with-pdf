@@ -1,46 +1,40 @@
-/* QnA.css */
+/* QuestionAnswer.css */
 
 .qa-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+  gap: 10px;
 }
 
-.qa-container input {
-  width: 80%;
+textarea {
+  width: 100%;
+  height: 100px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  margin-bottom: 10px;
+  resize: none;
 }
 
-.qa-container button {
-  padding: 10px 20px;
-  background-color: #3a0a5e; /* Premier League purple */
+.generate-button {
+  background-color: #3a0a5e;
   color: white;
   border: none;
-  border-radius: 5px;
+  padding: 10px 20px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-.qa-container button:hover {
-  background-color: #29073d; /* Darker purple for hover effect */
+.generate-button:hover {
+  background-color: #2e0847;
 }
 
 .response {
-  margin-top: 20px;
-  width: 80%;
-  background-color: #f8f8f8;
+  margin-top: 10px;
   padding: 10px;
+  background-color: #f8f8f8;
   border-radius: 5px;
 }
 
-.response strong {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
-  text-align: left; /* Aligning to the left */
+.response p {
+  margin: 0;
 }

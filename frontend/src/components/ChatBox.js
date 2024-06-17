@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './ChatBox.css';
 
-const ChatBox = () => {
+export const ChatBox = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [chatHistory, setChatHistory] = useState([]);
 
@@ -52,4 +52,3 @@ const ChatBox = () => {
   );
 };
 
-export default ChatBox;

@@ -1,0 +1,15 @@
+/* Dropzone.css */
+
+.dropzone {
+    border: 2px dashed #3a0a5e;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .dropzone p {
+    margin: 0;
+    font-size: 16px;
+    color: #3a0a5e;
+  }
+  

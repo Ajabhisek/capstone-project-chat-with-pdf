@@ -1,61 +1,55 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import FileUpload from './components/FileUpload';
-import QnA from './components/QnA';
-import ChatBox from './components/ChatBox';
+import { ChatBox } from './components/ChatBox';
+import { Dropzone } from './components/Dropzone';
+import { QnA } from './components/QnA';
 import './App.css';
 
-function App() {
-  const [fileData, setFileData] = useState(null);
+const App = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isFileProcessed, setIsFileProcessed] = useState(false);
 
-  const handleFileSelected = (file) => {
-    setFileData(file);
+  const handleFileSelect = (file) => {
+    setSelectedFile(file);
   };
 
-  const processFile = async () => {
-    if (fileData) {
+  const handleFileProcess = async () => {
+    if (selectedFile) {
       try {
-        const formData = new FormData();
-        formData.append('file', fileData);
-        const response = await axios.post('YOUR_BACKEND_PROCESS_ENDPOINT', formData);
-        console.log('PDF processed:', response.data);
+        // Mock API call to simulate file processing
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay
+        setIsFileProcessed(true);
       } catch (error) {
-        console.error('Error processing PDF:', error);
+        console.error('Error processing file:', error);
       }
     }
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="header-content">
-          <h1>Cognitive Q&A</h1>
-          <img src="your_image_path_here.png" alt="Chat or Robot" className="header-image" />
-        </div>
-        <p>Version 1.0</p>
+    <div className="app-container">
+      <header className="app-header">
+        <h1>Cognitive QnA with PDF</h1>
       </header>
-      <main>
+      <div className="main-content">
         <div className="left-section">
-          <section className="upload-section">
-            <h2>Upload your PDF</h2>
-            <FileUpload onFileSelected={handleFileSelected} />
-            {fileData && <button className="process-button" onClick={processFile}>Process PDF</button>}
-          </section>
-          <section className="chat-history-section">
-            <ChatBox />
-          </section>
+          <Dropzone onFileSelect={handleFileSelect} />
+          {selectedFile && (
+            <div className="file-info">
+              <p>Selected file: {selectedFile.name}</p>
+              <button className="process-button" onClick={handleFileProcess}>Process PDF</button>
+            </div>
+          )}
+          <ChatBox />
         </div>
-        <section className="qa-section">
-          <h2>Ask me anything!</h2>
-          <QnA fileData={fileData} />
-        </section>
-      </main>
-      <footer>
-        <p>Design and Build by Group 4</p>
-        <p>Group 4©. All rights reserved</p>
+        <div className="right-section">
+          <QnA isFileProcessed={isFileProcessed} />
+        </div>
+      </div>
+      <footer className="app-footer">
+        <p>&copy; 2024 Cognitive QnA</p>
       </footer>
     </div>
   );
-}
+};
 
 export default App;

@@ -2,40 +2,52 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './QnA.css';
 
-const QnA = ({ fileData }) => {
+export const QnA = ({ isFileProcessed }) => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
-  const askQuestion = async () => {
-    if (question.trim() !== '' && fileData) {
-      try {
-        const response = await axios.post('YOUR_BACKEND_QUESTION_ENDPOINT', {
-          question,
-          fileData,
-        });
-        setAnswer(response.data.answer);
-      } catch (error) {
-        console.error('Error getting answer:', error);
-        setAnswer('Error getting answer.');
-      }
+  const handleGenerateAnswer = async () => {
+    try {
+      // Mock API call to OpenAI for generating answer
+      const response = await axios.post('https://api.openai.com/v1/completions', {
+        prompt: question,
+        max_tokens: 150,
+        model: "text-davinci-003",
+      }, {
+        headers: {
+          'Authorization': `Bearer YOUR_OPENAI_API_KEY`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      setAnswer(response.data.choices[0].text.trim());
+    } catch (error) {
+      console.error('Error generating answer:', error);
+      setAnswer('Error generating answer');
     }
   };
 
   return (
     <div className="qa-container">
-      <input
-        type="text"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-        placeholder="Ask a question about the PDF..."
-      />
-      <button onClick={askQuestion}>Generate Answer</button>
-      <div className="response">
-        <strong>Response:</strong>
-        <p>{answer}</p>
-      </div>
+      <h2>Ask a Question</h2>
+      {isFileProcessed ? (
+        <>
+          <textarea
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Type your question here..."
+          />
+          <button className="generate-button" onClick={handleGenerateAnswer}>Generate Answer</button>
+          {answer && (
+            <div className="response">
+              <strong>Response:</strong>
+              <p>{answer}</p>
+            </div>
+          )}
+        </>
+      ) : (
+        <p>Please process a PDF file first.</p>
+      )}
     </div>
   );
 };
-
-export default QnA;
